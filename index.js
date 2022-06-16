@@ -1,63 +1,75 @@
-let exampleObject = {
-    name: 'Vlad', //Property
-    age: 24,
-    active: true,
-    favoriteSports: ["baseball", "basketball"],
-    sayHello: () => { //Method
-        console.log('Hello')
-    },
-    getAge: function () {
-        console.log(`i am ${this.age} years old`)
-    }
-}
+// let header = document.getElementById("header");
+// console.log(header);
+// console.log(document.body);
 
-const { name, age, favoriteSports } = exampleObject; 
-// let { name } = exampleObject;
-// console.log(name);
+// document.body.innerHTML = name;
 
-// console.log(exampleObject.name, exampleObject.age, exampleObject.favoriteSports)
+// let title = document.createElement("h1");
+// title.innerHTML = 'text';
+// document.body.appendChild(title);
 
-// let useParams = (nameParam, ageParam, favoriteSportsParam) => {
-//     console.log(nameParam);
-//     console.log(ageParam);
-//     console.log(favoriteSportsParam);
-// }
+// console.log(title);
 
-// useParams('avram', 34, 'exemplu');
+// document.body.innerHTML = 'ceva';
 
-let person = {
-    name: 'Vlad',
-    email: 'vlad_sdsjd@mail.com',
-    isSenior: function() {
-        return age > 60;
-    }
-}
 
-let createPerson = (nameParam, emailParam, ageParam) => {
+// FACTORY FUNCTION TO CREATE THE PRICE TABLE OBJECT
+let createPriceTableObjects = (title, description, price, operators) => {
     return {
-        name: nameParam,
-        email: emailParam,
-        isSenior: function() {
-            return ageParam > 60;
-        }
+        title, 
+        description,
+        price,
+        operators
     }
 }
+// FACTORY FUNCTION TO CREATE THE PRICE TABLE OBJECT
 
-let person1 = createPerson('Vlad', 'vlad_avram@mail.com', 24);
-let person2 = createPerson('Mihai', 'mihai@mail.com', 30);
-let person3 = createPerson('Ion', 'ion@mail.com', 70);
 
-console.log(person1);
-console.log(person2);
-console.log(person3);
+// DECLARED THE PRICE TABLES AS VARIABLES
+let freeTable = createPriceTableObjects('Free', 'Brief price description', '0$', 'Only 2 Operators');
+let standardTable = createPriceTableObjects('Standard', 'Brief price description', '5$', '5+ Operators');
+let premiumTable = createPriceTableObjects('Premium', 'Brief price description', '10$', '10+ Operators');
+// DECLARED THE PRICE TABLES AS VARIABLES
 
-console.log(person1.isSenior());
-console.log(person2.isSenior());
-console.log(person3.isSenior());
 
-let personArray = [person1, person2, person3];
+// ADDED PRICE PRICE TABLES VARIABLES IN A PRICE TABLE ARRAY
+let priceTableArray = [freeTable, standardTable, premiumTable];
+console.log(priceTableArray);
+// ADDED PRICE PRICE TABLES VARIABLES IN A PRICE TABLE ARRAY
 
-personArray.map((person) => {
-    console.log(`Persoana cu numele ${person.name} este senior? ${person.isSenior()}`);
+// FUNCTION TO CREATE THE HTML ELEMENTS WITH THE VALUES
+let createElements = (titleParam, descriptionParam, priceParam, operatorsParam) => {
+    let container = document.createElement("div");
+    let holderContainer = document.getElementById("holder");
+    container.className = "container";
+    holderContainer.appendChild(container);
+
+    let title = document.createElement("h1");
+    title.className = "title";
+    title.innerHTML = titleParam;
+    container.appendChild(title);
+
+    let description = document.createElement("h1");
+    description.className = "title";
+    description.innerHTML = descriptionParam;
+    container.appendChild(description);
+
+    let price = document.createElement("h1");
+    price.className = "title";
+    price.innerHTML = priceParam;
+    container.appendChild(price);
+
+    let operators = document.createElement("h1");
+    operators.className = "title";
+    operators.innerHTML = operatorsParam;
+    container.appendChild(operators);
+}
+// FUNCTION TO CREATE THE HTML ELEMENTS WITH THE VALUES
+
+
+//THE PRICE TABLE ARRAY ITERATED TO CALL THE CREATE ELEMENTS FUNCTION FOR EVERY PRICE TABLE OBJECT IN THE ARRAY
+priceTableArray.map((priceTable) => {
+    createElements(priceTable.title, priceTable.description, priceTable.price, priceTable.operators)
 })
+//THE PRICE TABLE ARRAY ITERATED TO CALL THE CREATE ELEMENTS FUNCTION FOR EVERY PRICE TABLE OBJECT IN THE ARRAY
 
